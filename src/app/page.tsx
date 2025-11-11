@@ -1,14 +1,38 @@
-"use client";
+import { auth } from '@/lib/auth';
+import  HomeView  from '@/modules/home/ui/views/home-view';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
+const page = async () => {
 
-import { Button } from '@/components/ui/button'
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-const page = () => {
-  return (
-    <Button>
-      click me
-    </Button>
-  )
+  if(!session){
+    redirect("/sign-in");
+  }
+
+  return <HomeView />
 }
 
 export default page
+
+// import { auth } from "@/lib/auth";
+// import HomeView from "@/modules/home/ui/views/home-view";
+// import { headers } from "next/headers";
+// import { redirect } from "next/navigation";
+
+// export default async function Page() {
+//   const session = await auth.api.getSession({
+//     headers: await headers(),
+//   });
+
+//   if (!session) {
+//     redirect("/sign-in");
+//   }
+
+//   return <HomeView />;
+// }
+
+

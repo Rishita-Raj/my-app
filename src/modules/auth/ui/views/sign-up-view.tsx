@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { OctagonAlertIcon } from "lucide-react";
+import { FaGithub, FaGoogle } from "react-icons/fa"; 
 import { Card, CardContent } from '@/components/ui/card'
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Form,
@@ -61,6 +62,7 @@ const SignUpView = () => {
                 name : data.name,
                 email : data.email,
                 password: data.password,
+                callbackURL:"/",
             },
             {
                 onSuccess: () => {
@@ -74,6 +76,28 @@ const SignUpView = () => {
         );
 
     };
+
+    const onSocial = (provider: "github" | "google") => {
+        setError(null);
+        setPending(true);
+
+        authClient.signIn.social(
+            {
+                provider: provider,
+                callbackURL:"/",
+            },
+            {
+                onSuccess: () => {
+                    setPending(false);
+                },
+                onError:({error})=>{
+                    setError(error.message)
+                },
+            }
+        );
+
+    };
+
 
     console.log("Sign up  view");
  
@@ -205,19 +229,21 @@ const SignUpView = () => {
         <div className="grid grid-cols-2 gap-4">
             <Button
              disabled={pending}
+             onClick={() => onSocial("google")}
             variant="outline"
             type="button"
             className="w-full"
             >
-                Google 
+                <FaGoogle />
             </Button>
             <Button
+             onClick={() => onSocial("github")}
              disabled={pending}
             variant="outline"
             type="button"
             className="w-full"
             >
-                Github 
+                <FaGithub />
             </Button>
         </div>
         <div className="text-center text-sm">
