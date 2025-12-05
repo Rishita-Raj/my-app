@@ -47,12 +47,8 @@ const secondSection = [
 
                 <div className="px-4 py-2">                 
                   <Separator className="opacity-10 text-[#5D6B68]"/>
+                  
                 </div>
-{/* 
-                <div className="px-4 py-2">
- <Separator className="my-2 bg-border" />
-
-</div> */}
 
 
                 <SidebarContent>
