@@ -1,29 +1,66 @@
 "use client"
 
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-import { PanelLeftIcon } from "lucide-react"
+// import * as React from "react"
+// import { Slot } from "@radix-ui/react-slot"
+// import { cva, type VariantProps } from "class-variance-authority"
+// import { PanelLeftIcon } from "lucide-react"
 
-import { useIsMobile } from "@/src/hooks/use-mobile"
-import { cn } from "@/src/lib/utils"
-import { Button } from "@/src/components/ui/button"
-import { Input } from "@/src/components/ui/input"
-import { Separator } from "@/src/components/ui/separator"
+// import { useIsMobile } from "@/src/hooks/use-mobile"
+// import { cn } from "@/src/lib/utils"
+// import { Button } from "@/src/components/ui/button"
+// import { Input } from "@/src/components/ui/input"
+// import { Separator } from "@/src/components/ui/separator"
+// import {
+//   Sheet,
+//   SheetContent,
+//   SheetDescription,
+//   SheetHeader,
+//   SheetTitle,
+// } from "@/src/components/ui/sheet"
+// import { Skeleton } from "@/src/components/ui/skeleton"
+// import {
+//   Tooltip,
+//   TooltipContent,
+//   TooltipProvider,
+//   TooltipTrigger,
+// } from "@/src/components/ui/tooltip"
+
+
+"use client";
+
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { PanelLeftIcon } from "lucide-react";
+
+// ✅ Correct hook import
+import { useIsMobile } from "@/hooks/use-mobile";
+
+// ✅ Correct utility import
+import { cn } from "@/lib/utils";
+
+// ✅ Correct UI components imports
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/src/components/ui/sheet"
-import { Skeleton } from "@/src/components/ui/skeleton"
+} from "@/components/ui/sheet";
+
+import { Skeleton } from "@/components/ui/skeleton";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/src/components/ui/tooltip"
+} from "@/components/ui/tooltip";
+
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
