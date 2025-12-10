@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import {Inter } from "next/font/google";
 import "./globals.css";
+import {NuqsAdapter} from "nuqs/adapters/next";
+
 
 import { TRPCReactProvider } from "@/trpc/client"; 
 import { Toaster } from "@/components/ui/sonner";
@@ -9,11 +11,6 @@ const inter = Inter({
   // variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
-// const inter = Inter ({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,6 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <NuqsAdapter>
+
     <TRPCReactProvider>
     
     <html lang="en">
@@ -37,5 +36,6 @@ export default function RootLayout({
       </body>
     </html>
     </TRPCReactProvider>
+    </NuqsAdapter>
   );
 }
