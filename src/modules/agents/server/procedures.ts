@@ -5,20 +5,54 @@ import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { agentsInsertSchema } from "../schema";
 import { and, count, desc, eq, getTableColumns, ilike, sql } from "drizzle-orm";
 import { MIN_PAGE_SIZE, MAX_PAGE_SIZE, DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "@/constants";
+import { TRPCError } from "@trpc/server";
 
 
 export const agentsRouter = createTRPCRouter({
-    getOne : protectedProcedure.input(z.object({ id: z.string() })).query(async ({ input }) => {
-        const [existingAgent] = await db
-        .select({
-            ...getTableColumns(agents),
-            meetingCount: sql<number>`5`, 
-        })
-        .from(agents)
-        .where(eq(agents.id, input.id))
+    // getOne : protectedProcedure.input(z.object({ id: z.string() })).query(async ({ input, ctx }) => {
+    //     const [existingAgent] = await db
+    //     .select({
+    //         ...getTableColumns(agents),
+    //         meetingCount: sql<number>`5`, 
+    //     })
+    //     .from(agents)
+    //     .where(
+    //         and(
+    //         eq(agents.id, input.id),
+    //         eq(agents.userId, ctx.auth.user.id),
+    //     )
+    //     );
 
-        return [existingAgent];
-    }), 
+    //     if(!existingAgent){
+    //         throw new TRPCError({ code: "NOT_FOUND", message:"Agent not found"});
+    //     }
+
+    //     return [existingAgent];
+    // }), 
+   getOne : protectedProcedure
+.input(z.object({ id: z.string() }))
+.query(async ({ input, ctx }) => {
+    const [existingAgent] = await db
+      .select({
+        ...getTableColumns(agents),
+        meetingCount: sql<number>`5`,
+      })
+      .from(agents)
+      .where(
+        and(
+          eq(agents.id, input.id),
+          eq(agents.userId, ctx.auth.user.id),
+        )
+      );
+
+    if (!existingAgent) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Agent not found" });
+    }
+
+    return existingAgent;  // << Fix here!
+}),
+
+
      getMany : protectedProcedure
      .input(
         z.object({
