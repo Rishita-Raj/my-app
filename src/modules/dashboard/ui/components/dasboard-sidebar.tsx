@@ -4,7 +4,9 @@ import {
     Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { Separator } from "@radix-ui/react-separator";
+// import { Separator } from "@radix-ui/react-separator";
+import { Separator } from "@/components/ui/separator";
+ 
 import { VideoIcon, BotIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
