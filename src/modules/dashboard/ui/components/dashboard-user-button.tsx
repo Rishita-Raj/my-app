@@ -24,6 +24,8 @@ import { ChevronDownIcon, CreditCardIcon, LogOutIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from '@/components/ui/button';
+// import { authClientExtended as authClient } from '@/lib/auth-client-extended'
+
 
 const DashboardUserButton = () => {
     const router = useRouter();

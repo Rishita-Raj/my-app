@@ -1,5 +1,3 @@
-import React from 'react';
-import { Card } from '@/components/ui/card'
 import SignInView from '@/modules/auth/ui/views/sign-in-view';
 import { headers } from 'next/headers';
 import { auth } from '@/lib/auth';

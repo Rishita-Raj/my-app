@@ -8,7 +8,6 @@ import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
-  // variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 

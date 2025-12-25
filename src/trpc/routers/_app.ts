@@ -8,5 +8,4 @@ export const appRouter = createTRPCRouter({
   meetings: meetingsRouter,
   premium: premiumRouter,
 });
-// export type definition of API
 export type AppRouter = typeof appRouter;

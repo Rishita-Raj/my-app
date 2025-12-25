@@ -11,7 +11,6 @@ import {
     CommandList,
     CommandResponsiveDialog
 } from "@/components/ui/command";
-import { fa } from "zod/v4/locales";
 
 interface Props {
     options: Array<{

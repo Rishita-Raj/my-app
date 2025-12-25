@@ -11,6 +11,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 
+import { agentsUpdateSchema } from "../../schema";
+
+
 import {
     Form,
     FormControl,
@@ -76,8 +79,6 @@ export const AgentForm = ({
             },
             onError: ( error) => {
                 toast.error(error.message);
-
-                //comment
             },
         }),
     );
@@ -91,16 +92,37 @@ export const AgentForm = ({
         }, 
     });
 
-    const isEdit = !!initialValues?.id;
+    // const isEdit = !!initialValues?.id;
+    // const isEdit = typeof initialValues?.id === "string";
+
     const isPending = createAgent.isPending || updateAgent.isPending;
 
-    const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
-        if(isEdit){
-            updateAgent.mutate({ ...values, id : initialValues.id  });
-        }else{
-            createAgent.mutate(values);
-        }
-    };
+    // const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
+    //     if(isEdit){
+    //         updateAgent.mutate({ ...values, id : initialValues.id  });
+    //     }else{
+    //         createAgent.mutate(values);
+    //     }
+    // };
+
+    const agentId = initialValues?.id;
+    const isEdit = Boolean(agentId);
+
+
+
+const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
+  if (agentId) {
+    updateAgent.mutate({
+      id: agentId,
+      ...values,
+    });
+    return;
+  }
+
+  createAgent.mutate(values);
+};
+
+
 
     return (
         <Form {...form}>
